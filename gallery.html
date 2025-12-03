@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Movement Research | Dance Visualization Gallery</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Montserrat:wght@200;300;400;500&display=swap');
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #fafafa;
+            color: #222;
+            min-height: 100vh;
+            font-weight: 300;
+        }
+        
+        /* Header */
+        header {
+            padding: 60px 40px 40px;
+            text-align: center;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .logo-text {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 0.9em;
+            font-weight: 400;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3.2em;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+            color: #111;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            font-size: 1em;
+            font-weight: 200;
+            color: #666;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+        
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 25px 40px;
+            background: #fff;
+            border-bottom: 1px solid #eee;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        nav a {
+            font-size: 0.85em;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: #555;
+            text-decoration: none;
+            padding: 8px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover, nav a.active {
+            color: #111;
+            border-bottom-color: #111;
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+        
+        /* View Toggle */
+        .view-toggle {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 50px;
+        }
+        
+        .view-btn {
+            padding: 12px 30px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8em;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: #fff;
+            border: 1px solid #ddd;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn:hover {
+            border-color: #999;
+            color: #111;
+        }
+        
+        .view-btn.active {
+            background: #111;
+            border-color: #111;
+            color: #fff;
+        }
+        
+        /* Gallery View */
+        #gallery-view {
+            display: block;
+        }
+        
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8em;
+            font-weight: 400;
+            color: #111;
+            margin-bottom: 10px;
+            padding-top: 40px;
+        }
+        
+        .section-subtitle {
+            font-size: 0.85em;
+            font-weight: 300;
+            color: #888;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .dance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .dance-card {
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 30px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .dance-card:hover {
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transform: translateY(-3px);
+        }
+        
+        .dance-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5em;
+            font-weight: 500;
+            color: #111;
+            margin-bottom: 8px;
+        }
+        
+        .dance-card .tradition {
+            font-size: 0.8em;
+            font-weight: 400;
+            color: #999;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .dance-card .meta {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85em;
+            color: #888;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .btn-view, .btn-compare {
+            flex: 1;
+            padding: 12px 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.75em;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            text-align: center;
+            text-decoration: none;
+            border: 1px solid #ddd;
+            background: #fff;
+            color: #555;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-view:hover {
+            background: #111;
+            border-color: #111;
+            color: #fff;
+        }
+        
+        .btn-compare:hover {
+            border-color: #111;
+            color: #111;
+        }
+        
+        .btn-compare.selected {
+            background: #f0f0f0;
+            border-color: #111;
+            color: #111;
+        }
+        
+        /* Comparison View */
+        #compare-view {
+            display: none;
+        }
+        
+        .compare-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .compare-header h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2em;
+            font-weight: 400;
+            margin-bottom: 10px;
+        }
+        
+        .compare-header p {
+            color: #888;
+            font-weight: 300;
+        }
+        
+        .compare-selection {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        
+        .compare-slot {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #eee;
+            padding: 25px;
+        }
+        
+        .compare-slot h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            font-weight: 500;
+            margin-bottom: 15px;
+            color: #555;
+        }
+        
+        .compare-slot select {
+            width: 100%;
+            padding: 12px 15px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9em;
+            border: 1px solid #ddd;
+            background: #fafafa;
+            color: #333;
+            cursor: pointer;
+        }
+        
+        .compare-slot select:focus {
+            outline: none;
+            border-color: #111;
+        }
+        
+        .compare-frames {
+            display: flex;
+            gap: 20px;
+            height: 70vh;
+            min-height: 500px;
+        }
+        
+        .compare-frame {
+            flex: 1;
+            background: #fff;
+            border: 1px solid #eee;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .compare-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        .compare-frame .placeholder {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #ccc;
+        }
+        
+        .compare-frame .placeholder-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+        }
+        
+        .compare-frame .placeholder-text {
+            font-size: 0.9em;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        
+        .compare-controls {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .compare-controls button {
+            padding: 15px 40px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.8em;
+            font-weight: 400;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: #111;
+            border: 1px solid #111;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .compare-controls button:hover {
+            background: #333;
+        }
+        
+        .compare-controls button.secondary {
+            background: #fff;
+            color: #111;
+        }
+        
+        .compare-controls button.secondary:hover {
+            background: #f5f5f5;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 60px 40px;
+            background: #fff;
+            border-top: 1px solid #eee;
+            margin-top: 60px;
+        }
+        
+        footer p {
+            font-size: 0.85em;
+            color: #999;
+            margin-bottom: 10px;
+        }
+        
+        footer .credit {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.1em;
+            color: #555;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.2em; }
+            nav { flex-wrap: wrap; gap: 20px; }
+            .compare-frames { flex-direction: column; height: auto; }
+            .compare-frame { height: 50vh; }
+            .compare-selection { flex-direction: column; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-text">Artificial Embodied Intelligence</div>
+        <h1>Global Movement Research</h1>
+        <p class="subtitle">Cross-Cultural Dance Visualization Archive</p>
+    </header>
+    
+    <nav>
+        <a href="#" class="active" data-section="all">All Traditions</a>
+        <a href="#" data-section="sinclair">West African — Nigerian</a>
+        <a href="#" data-section="mustapha">West African — Ghanaian</a>
+        <a href="#" data-section="sudesh">Sri Lankan — Kandyan</a>
+        <a href="#" data-section="nadia">Afro-Cuban — Orisha</a>
+        <a href="#" data-section="kate">Irish — Brazilian</a>
+    </nav>
+    
+    <main>
+        <div class="view-toggle">
+            <button class="view-btn active" data-view="gallery">Gallery View</button>
+            <button class="view-btn" data-view="compare">Side-by-Side Comparison</button>
+        </div>
+        
+        <!-- Gallery View -->
+        <div id="gallery-view">
+            
+            <!-- Sinclair -->
+            <section id="sinclair-section" class="performer-section">
+                <h2 class="section-title">Sinclair</h2>
+                <p class="section-subtitle">West African — Nigerian Traditions</p>
+                <div class="dance-grid">
+                    <div class="dance-card" data-file="sinclair_bata_cyberspace.html" data-name="Bata" data-performer="Sinclair">
+                        <h3>Bata</h3>
+                        <div class="tradition">Traditional Yoruba</div>
+                        <div class="meta">
+                            <span>255 frames</span>
+                            <span>0:04</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_bata_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sinclair_bata_extended_cyberspace.html" data-name="Bata (Extended)" data-performer="Sinclair">
+                        <h3>Bata (Extended)</h3>
+                        <div class="tradition">Traditional Yoruba</div>
+                        <div class="meta">
+                            <span>4,604 frames</span>
+                            <span>1:16</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_bata_extended_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sinclair_ekombi_cyberspace.html" data-name="Ekombi" data-performer="Sinclair">
+                        <h3>Ekombi</h3>
+                        <div class="tradition">Efik/Ibibio Tradition</div>
+                        <div class="meta">
+                            <span>9,499 frames</span>
+                            <span>2:38</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_ekombi_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sinclair_esapkaide_i_cyberspace.html" data-name="Esapkaide I" data-performer="Sinclair">
+                        <h3>Esapkaide I</h3>
+                        <div class="tradition">Bini Traditional</div>
+                        <div class="meta">
+                            <span>1,621 frames</span>
+                            <span>0:27</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_esapkaide_i_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sinclair_esapkaide_ii_cyberspace.html" data-name="Esapkaide II" data-performer="Sinclair">
+                        <h3>Esapkaide II</h3>
+                        <div class="tradition">Bini Traditional</div>
+                        <div class="meta">
+                            <span>4,640 frames</span>
+                            <span>1:17</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_esapkaide_ii_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sinclair_esapkaide_iii_cyberspace.html" data-name="Esapkaide III" data-performer="Sinclair">
+                        <h3>Esapkaide III</h3>
+                        <div class="tradition">Bini Traditional</div>
+                        <div class="meta">
+                            <span>7,235 frames</span>
+                            <span>2:00</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_esapkaide_iii_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sinclair_swange_cyberspace.html" data-name="Swange" data-performer="Sinclair">
+                        <h3>Swange</h3>
+                        <div class="tradition">Tiv Tradition</div>
+                        <div class="meta">
+                            <span>7,434 frames</span>
+                            <span>2:04</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_swange_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sinclair_ugho_cyberspace.html" data-name="Ugho" data-performer="Sinclair">
+                        <h3>Ugho</h3>
+                        <div class="tradition">Bini Traditional</div>
+                        <div class="meta">
+                            <span>6,791 frames</span>
+                            <span>1:53</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sinclair_ugho_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Mustapha -->
+            <section id="mustapha-section" class="performer-section">
+                <h2 class="section-title">Mustapha</h2>
+                <p class="section-subtitle">West African — Ghanaian Traditions</p>
+                <div class="dance-grid">
+                    <div class="dance-card" data-file="mustapha_bata_cyberspace.html" data-name="Bata" data-performer="Mustapha">
+                        <h3>Bata</h3>
+                        <div class="tradition">Yoruba Tradition</div>
+                        <div class="meta">
+                            <span>4,546 frames</span>
+                            <span>1:15</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="mustapha_bata_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="mustapha_adzogbo_cyberspace.html" data-name="Adzogbo" data-performer="Mustapha">
+                        <h3>Adzogbo</h3>
+                        <div class="tradition">Ewe Warrior Dance</div>
+                        <div class="meta">
+                            <span>11,914 frames</span>
+                            <span>3:18</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="mustapha_adzogbo_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="mustapha_agbadza_cyberspace.html" data-name="Agbadza" data-performer="Mustapha">
+                        <h3>Agbadza</h3>
+                        <div class="tradition">Ewe Social Dance</div>
+                        <div class="meta">
+                            <span>12,802 frames</span>
+                            <span>3:33</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="mustapha_agbadza_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="mustapha_atsiagbekor_cyberspace.html" data-name="Atsiagbekor" data-performer="Mustapha">
+                        <h3>Atsiagbekor</h3>
+                        <div class="tradition">Ewe War Dance</div>
+                        <div class="meta">
+                            <span>9,857 frames</span>
+                            <span>2:44</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="mustapha_atsiagbekor_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="mustapha_djole_cyberspace.html" data-name="Djole" data-performer="Mustapha">
+                        <h3>Djole</h3>
+                        <div class="tradition">West African Welcome</div>
+                        <div class="meta">
+                            <span>5,633 frames</span>
+                            <span>1:34</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="mustapha_djole_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="mustapha_fumefume_cyberspace.html" data-name="Fumefume" data-performer="Mustapha">
+                        <h3>Fumefume</h3>
+                        <div class="tradition">Ga Tradition</div>
+                        <div class="meta">
+                            <span>11,967 frames</span>
+                            <span>3:19</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="mustapha_fumefume_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="mustapha_kpanlongo_cyberspace.html" data-name="Kpanlongo" data-performer="Mustapha">
+                        <h3>Kpanlongo</h3>
+                        <div class="tradition">Ga Youth Dance</div>
+                        <div class="meta">
+                            <span>9,540 frames</span>
+                            <span>2:39</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="mustapha_kpanlongo_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Sudesh -->
+            <section id="sudesh-section" class="performer-section">
+                <h2 class="section-title">Sudesh</h2>
+                <p class="section-subtitle">Sri Lankan — Kandyan Traditions</p>
+                <div class="dance-grid">
+                    <div class="dance-card" data-file="sudesh_gajaga_vannama_fast_cyberspace.html" data-name="Gajaga Vannama (Fast)" data-performer="Sudesh">
+                        <h3>Gajaga Vannama (Fast)</h3>
+                        <div class="tradition">Kandyan Classical</div>
+                        <div class="meta">
+                            <span>3,388 frames</span>
+                            <span>0:56</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sudesh_gajaga_vannama_fast_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sudesh_gajaga_vannama_slow_cyberspace.html" data-name="Gajaga Vannama (Slow)" data-performer="Sudesh">
+                        <h3>Gajaga Vannama (Slow)</h3>
+                        <div class="tradition">Kandyan Classical</div>
+                        <div class="meta">
+                            <span>12,382 frames</span>
+                            <span>3:26</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sudesh_gajaga_vannama_slow_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sudesh_folk_&_court_dance_cyberspace.html" data-name="Folk & Court Dance" data-performer="Sudesh">
+                        <h3>Folk & Court Dance</h3>
+                        <div class="tradition">Kandyan Classical</div>
+                        <div class="meta">
+                            <span>7,994 frames</span>
+                            <span>2:13</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sudesh_folk_&_court_dance_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sudesh_kohomba_kankariya_cyberspace.html" data-name="Kohomba Kankariya" data-performer="Sudesh">
+                        <h3>Kohomba Kankariya</h3>
+                        <div class="tradition">Sacred Ritual Dance</div>
+                        <div class="meta">
+                            <span>5,822 frames</span>
+                            <span>1:37</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sudesh_kohomba_kankariya_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sudesh_telme_ruhunu_cyberspace.html" data-name="Telme Ruhunu" data-performer="Sudesh">
+                        <h3>Telme Ruhunu</h3>
+                        <div class="tradition">Southern Tradition</div>
+                        <div class="meta">
+                            <span>7,587 frames</span>
+                            <span>2:06</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sudesh_telme_ruhunu_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="sudesh_baila_kappirinna_cyberspace.html" data-name="Baila Kappirinna" data-performer="Sudesh">
+                        <h3>Baila Kappirinna</h3>
+                        <div class="tradition">Portuguese Influence</div>
+                        <div class="meta">
+                            <span>6,806 frames</span>
+                            <span>1:53</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="sudesh_baila_kappirinna_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Nadia -->
+            <section id="nadia-section" class="performer-section">
+                <h2 class="section-title">Nadia</h2>
+                <p class="section-subtitle">Afro-Cuban — Orisha Traditions</p>
+                <div class="dance-grid">
+                    <div class="dance-card" data-file="nadia_changó_cyberspace.html" data-name="Changó" data-performer="Nadia">
+                        <h3>Changó</h3>
+                        <div class="tradition">Orisha of Thunder</div>
+                        <div class="meta">
+                            <span>3,758 frames</span>
+                            <span>1:02</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="nadia_changó_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="nadia_kuele_kuele_cyberspace.html" data-name="Kuele Kuele" data-performer="Nadia">
+                        <h3>Kuele Kuele</h3>
+                        <div class="tradition">Afro-Cuban Folkloric</div>
+                        <div class="meta">
+                            <span>7,497 frames</span>
+                            <span>2:05</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="nadia_kuele_kuele_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="nadia_yemayá_cyberspace.html" data-name="Yemayá" data-performer="Nadia">
+                        <h3>Yemayá</h3>
+                        <div class="tradition">Orisha of the Sea</div>
+                        <div class="meta">
+                            <span>6,466 frames</span>
+                            <span>1:47</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="nadia_yemayá_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Kate -->
+            <section id="kate-section" class="performer-section">
+                <h2 class="section-title">Kate</h2>
+                <p class="section-subtitle">Irish — Brazilian Traditions</p>
+                <div class="dance-grid">
+                    <div class="dance-card" data-file="kate_festival_blackbird_cyberspace.html" data-name="Festival Blackbird" data-performer="Kate">
+                        <h3>Festival Blackbird</h3>
+                        <div class="tradition">Irish Festival Style</div>
+                        <div class="meta">
+                            <span>8,816 frames</span>
+                            <span>2:27</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="kate_festival_blackbird_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="kate_slip_jig_cyberspace.html" data-name="Slip Jig" data-performer="Kate">
+                        <h3>Slip Jig</h3>
+                        <div class="tradition">Irish Festival Style</div>
+                        <div class="meta">
+                            <span>6,380 frames</span>
+                            <span>1:46</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="kate_slip_jig_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="kate_sean-nós_jigs_cyberspace.html" data-name="Sean-nós Jigs" data-performer="Kate">
+                        <h3>Sean-nós Jigs</h3>
+                        <div class="tradition">Traditional Irish</div>
+                        <div class="meta">
+                            <span>8,164 frames</span>
+                            <span>2:16</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="kate_sean-nós_jigs_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="kate_frevo_cyberspace.html" data-name="Frevo" data-performer="Kate">
+                        <h3>Frevo</h3>
+                        <div class="tradition">Brazilian Carnival</div>
+                        <div class="meta">
+                            <span>5,259 frames</span>
+                            <span>1:27</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="kate_frevo_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="kate_garden_of_daisies_cyberspace.html" data-name="Garden of Daisies" data-performer="Kate">
+                        <h3>Garden of Daisies</h3>
+                        <div class="tradition">Irish Traditional</div>
+                        <div class="meta">
+                            <span>3,512 frames</span>
+                            <span>0:58</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="kate_garden_of_daisies_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                    <div class="dance-card" data-file="kate_molyneaux_blackbird_cyberspace.html" data-name="Molyneaux Blackbird" data-performer="Kate">
+                        <h3>Molyneaux Blackbird</h3>
+                        <div class="tradition">North Kerry Style</div>
+                        <div class="meta">
+                            <span>3,090 frames</span>
+                            <span>0:51</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="kate_molyneaux_blackbird_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Annie Laura -->
+            <section id="annie-section" class="performer-section">
+                <h2 class="section-title">Annie Laura</h2>
+                <p class="section-subtitle">Latin Traditions</p>
+                <div class="dance-grid">
+                    <div class="dance-card" data-file="annie_laura_salsa_cyberspace.html" data-name="Salsa" data-performer="Annie Laura">
+                        <h3>Salsa</h3>
+                        <div class="tradition">Cuban/Puerto Rican</div>
+                        <div class="meta">
+                            <span>5,554 frames</span>
+                            <span>1:32</span>
+                        </div>
+                        <div class="card-actions">
+                            <a href="annie_laura_salsa_cyberspace.html" class="btn-view" target="_blank">View</a>
+                            <button class="btn-compare">Compare</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+        </div>
+        
+        <!-- Comparison View -->
+        <div id="compare-view">
+            <div class="compare-header">
+                <h2>Side-by-Side Comparison</h2>
+                <p>Select two dances to compare movement patterns across traditions</p>
+            </div>
+            
+            <div class="compare-selection">
+                <div class="compare-slot">
+                    <h4>Dance A</h4>
+                    <select id="dance-a">
+                        <option value="">— Select a dance —</option>
+                        <optgroup label="Sinclair — West African / Nigerian">
+                            <option value="sinclair_bata_cyberspace.html">Bata</option>
+                            <option value="sinclair_bata_extended_cyberspace.html">Bata (Extended)</option>
+                            <option value="sinclair_ekombi_cyberspace.html">Ekombi</option>
+                            <option value="sinclair_esapkaide_i_cyberspace.html">Esapkaide I</option>
+                            <option value="sinclair_esapkaide_ii_cyberspace.html">Esapkaide II</option>
+                            <option value="sinclair_esapkaide_iii_cyberspace.html">Esapkaide III</option>
+                            <option value="sinclair_swange_cyberspace.html">Swange</option>
+                            <option value="sinclair_ugho_cyberspace.html">Ugho</option>
+                        </optgroup>
+                        <optgroup label="Mustapha — West African / Ghanaian">
+                            <option value="mustapha_bata_cyberspace.html">Bata</option>
+                            <option value="mustapha_adzogbo_cyberspace.html">Adzogbo</option>
+                            <option value="mustapha_agbadza_cyberspace.html">Agbadza</option>
+                            <option value="mustapha_atsiagbekor_cyberspace.html">Atsiagbekor</option>
+                            <option value="mustapha_djole_cyberspace.html">Djole</option>
+                            <option value="mustapha_fumefume_cyberspace.html">Fumefume</option>
+                            <option value="mustapha_kpanlongo_cyberspace.html">Kpanlongo</option>
+                        </optgroup>
+                        <optgroup label="Sudesh — Sri Lankan / Kandyan">
+                            <option value="sudesh_gajaga_vannama_fast_cyberspace.html">Gajaga Vannama (Fast)</option>
+                            <option value="sudesh_gajaga_vannama_slow_cyberspace.html">Gajaga Vannama (Slow)</option>
+                            <option value="sudesh_folk_&_court_dance_cyberspace.html">Folk & Court Dance</option>
+                            <option value="sudesh_kohomba_kankariya_cyberspace.html">Kohomba Kankariya</option>
+                            <option value="sudesh_telme_ruhunu_cyberspace.html">Telme Ruhunu</option>
+                            <option value="sudesh_baila_kappirinna_cyberspace.html">Baila Kappirinna</option>
+                        </optgroup>
+                        <optgroup label="Nadia — Afro-Cuban / Orisha">
+                            <option value="nadia_changó_cyberspace.html">Changó</option>
+                            <option value="nadia_kuele_kuele_cyberspace.html">Kuele Kuele</option>
+                            <option value="nadia_yemayá_cyberspace.html">Yemayá</option>
+                        </optgroup>
+                        <optgroup label="Kate — Irish / Brazilian">
+                            <option value="kate_festival_blackbird_cyberspace.html">Festival Blackbird</option>
+                            <option value="kate_slip_jig_cyberspace.html">Slip Jig</option>
+                            <option value="kate_sean-nós_jigs_cyberspace.html">Sean-nós Jigs</option>
+                            <option value="kate_frevo_cyberspace.html">Frevo</option>
+                            <option value="kate_garden_of_daisies_cyberspace.html">Garden of Daisies</option>
+                            <option value="kate_molyneaux_blackbird_cyberspace.html">Molyneaux Blackbird</option>
+                        </optgroup>
+                        <optgroup label="Annie Laura — Latin">
+                            <option value="annie_laura_salsa_cyberspace.html">Salsa</option>
+                        </optgroup>
+                    </select>
+                </div>
+                <div class="compare-slot">
+                    <h4>Dance B</h4>
+                    <select id="dance-b">
+                        <option value="">— Select a dance —</option>
+                        <optgroup label="Sinclair — West African / Nigerian">
+                            <option value="sinclair_bata_cyberspace.html">Bata</option>
+                            <option value="sinclair_bata_extended_cyberspace.html">Bata (Extended)</option>
+                            <option value="sinclair_ekombi_cyberspace.html">Ekombi</option>
+                            <option value="sinclair_esapkaide_i_cyberspace.html">Esapkaide I</option>
+                            <option value="sinclair_esapkaide_ii_cyberspace.html">Esapkaide II</option>
+                            <option value="sinclair_esapkaide_iii_cyberspace.html">Esapkaide III</option>
+                            <option value="sinclair_swange_cyberspace.html">Swange</option>
+                            <option value="sinclair_ugho_cyberspace.html">Ugho</option>
+                        </optgroup>
+                        <optgroup label="Mustapha — West African / Ghanaian">
+                            <option value="mustapha_bata_cyberspace.html">Bata</option>
+                            <option value="mustapha_adzogbo_cyberspace.html">Adzogbo</option>
+                            <option value="mustapha_agbadza_cyberspace.html">Agbadza</option>
+                            <option value="mustapha_atsiagbekor_cyberspace.html">Atsiagbekor</option>
+                            <option value="mustapha_djole_cyberspace.html">Djole</option>
+                            <option value="mustapha_fumefume_cyberspace.html">Fumefume</option>
+                            <option value="mustapha_kpanlongo_cyberspace.html">Kpanlongo</option>
+                        </optgroup>
+                        <optgroup label="Sudesh — Sri Lankan / Kandyan">
+                            <option value="sudesh_gajaga_vannama_fast_cyberspace.html">Gajaga Vannama (Fast)</option>
+                            <option value="sudesh_gajaga_vannama_slow_cyberspace.html">Gajaga Vannama (Slow)</option>
+                            <option value="sudesh_folk_&_court_dance_cyberspace.html">Folk & Court Dance</option>
+                            <option value="sudesh_kohomba_kankariya_cyberspace.html">Kohomba Kankariya</option>
+                            <option value="sudesh_telme_ruhunu_cyberspace.html">Telme Ruhunu</option>
+                            <option value="sudesh_baila_kappirinna_cyberspace.html">Baila Kappirinna</option>
+                        </optgroup>
+                        <optgroup label="Nadia — Afro-Cuban / Orisha">
+                            <option value="nadia_changó_cyberspace.html">Changó</option>
+                            <option value="nadia_kuele_kuele_cyberspace.html">Kuele Kuele</option>
+                            <option value="nadia_yemayá_cyberspace.html">Yemayá</option>
+                        </optgroup>
+                        <optgroup label="Kate — Irish / Brazilian">
+                            <option value="kate_festival_blackbird_cyberspace.html">Festival Blackbird</option>
+                            <option value="kate_slip_jig_cyberspace.html">Slip Jig</option>
+                            <option value="kate_sean-nós_jigs_cyberspace.html">Sean-nós Jigs</option>
+                            <option value="kate_frevo_cyberspace.html">Frevo</option>
+                            <option value="kate_garden_of_daisies_cyberspace.html">Garden of Daisies</option>
+                            <option value="kate_molyneaux_blackbird_cyberspace.html">Molyneaux Blackbird</option>
+                        </optgroup>
+                        <optgroup label="Annie Laura — Latin">
+                            <option value="annie_laura_salsa_cyberspace.html">Salsa</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="compare-frames">
+                <div class="compare-frame" id="frame-a">
+                    <div class="placeholder">
+                        <div class="placeholder-icon">◇</div>
+                        <div class="placeholder-text">Select Dance A</div>
+                    </div>
+                </div>
+                <div class="compare-frame" id="frame-b">
+                    <div class="placeholder">
+                        <div class="placeholder-icon">◇</div>
+                        <div class="placeholder-text">Select Dance B</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="compare-controls">
+                <button class="secondary" onclick="clearComparison()">Clear Selection</button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <p class="credit">Global Movement Research</p>
+        <p>Cross-Cultural Dance Analysis Through Motion Capture Technology</p>
+        <p>Principal Researcher: Sinclair</p>
+    </footer>
+    
+    <script>
+        // View Toggle
+        document.querySelectorAll('.view-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.view-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                
+                const view = this.dataset.view;
+                document.getElementById('gallery-view').style.display = view === 'gallery' ? 'block' : 'none';
+                document.getElementById('compare-view').style.display = view === 'compare' ? 'block' : 'none';
+            });
+        });
+        
+        // Navigation filtering
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelectorAll('nav a').forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+                
+                const section = this.dataset.section;
+                document.querySelectorAll('.performer-section').forEach(s => {
+                    if (section === 'all') {
+                        s.style.display = 'block';
+                    } else {
+                        s.style.display = s.id.includes(section) ? 'block' : 'none';
+                    }
+                });
+            });
+        });
+        
+        // Compare button functionality
+        let selectedForCompare = [];
+        
+        document.querySelectorAll('.btn-compare').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const card = this.closest('.dance-card');
+                const file = card.dataset.file;
+                const name = card.dataset.name;
+                
+                if (this.classList.contains('selected')) {
+                    this.classList.remove('selected');
+                    selectedForCompare = selectedForCompare.filter(s => s.file !== file);
+                } else if (selectedForCompare.length < 2) {
+                    this.classList.add('selected');
+                    selectedForCompare.push({ file, name });
+                    
+                    if (selectedForCompare.length === 2) {
+                        // Switch to compare view
+                        document.querySelector('.view-btn[data-view="compare"]').click();
+                        document.getElementById('dance-a').value = selectedForCompare[0].file;
+                        document.getElementById('dance-b').value = selectedForCompare[1].file;
+                        loadComparison();
+                    }
+                }
+            });
+        });
+        
+        // Dropdown comparison
+        document.getElementById('dance-a').addEventListener('change', loadComparison);
+        document.getElementById('dance-b').addEventListener('change', loadComparison);
+        
+        function loadComparison() {
+            const danceA = document.getElementById('dance-a').value;
+            const danceB = document.getElementById('dance-b').value;
+            
+            const frameA = document.getElementById('frame-a');
+            const frameB = document.getElementById('frame-b');
+            
+            if (danceA) {
+                frameA.innerHTML = `<iframe src="${danceA}" title="Dance A"></iframe>`;
+            } else {
+                frameA.innerHTML = '<div class="placeholder"><div class="placeholder-icon">◇</div><div class="placeholder-text">Select Dance A</div></div>';
+            }
+            
+            if (danceB) {
+                frameB.innerHTML = `<iframe src="${danceB}" title="Dance B"></iframe>`;
+            } else {
+                frameB.innerHTML = '<div class="placeholder"><div class="placeholder-icon">◇</div><div class="placeholder-text">Select Dance B</div></div>';
+            }
+        }
+        
+        function clearComparison() {
+            document.getElementById('dance-a').value = '';
+            document.getElementById('dance-b').value = '';
+            loadComparison();
+            
+            // Clear selected buttons
+            document.querySelectorAll('.btn-compare.selected').forEach(btn => btn.classList.remove('selected'));
+            selectedForCompare = [];
+        }
+    </script>
+</body>
+</html>
